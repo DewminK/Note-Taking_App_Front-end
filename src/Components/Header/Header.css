@@ -1,0 +1,6 @@
+#bodycontent{
+    min-height: 25vh;
+    background-color: red;
+    border-color: black;
+    border-radius: 5px;
+}

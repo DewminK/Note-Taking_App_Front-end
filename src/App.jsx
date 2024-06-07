@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Menu from './Components/Functions/Menu';
+import CreateNote from './Components/Functions/CreateNotes';
+import UpdateNote from './Components/Functions/UpdateNotes';
+import DeleteNote from './Components/Functions/DeleteNotes';
+import ViewNote from './Components/Functions/ViewNotes';
+import useFetch from './hooks/useFetch';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { data: notes, pending: pendingNotes, error: errorNotes } = useFetch("http://localhost:5000/notes");
+
+  if (pendingNotes) return <div>Loading notes...</div>;
+  if (errorNotes) return <div>Error: {errorNotes}</div>;
 
   return (
-    <>
+    <Router>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Menu />
+        <Routes>
+          <Route path="/create" element={<CreateNote />} />
+          <Route path="/update" element={<UpdateNote notes={notes} />} />
+          <Route path="/delete" element={<DeleteNote notes={notes} />} />
+          <Route path="/view" element={<ViewNote notes={notes} />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
