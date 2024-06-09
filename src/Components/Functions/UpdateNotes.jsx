@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
+import './Display.css';
 
 const UpdateNote = ({ notes }) => {
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+  const handleSelectChange = (e) => {
+    setId(e.target.value);
+
+    const selectedNote = notes.find(note => note._id === e.target.value);
+    setTitle(selectedNote ? selectedNote.header : '');
+    setContent(selectedNote ? selectedNote.description : '');
+  };
 
   const updateNote = async (e) => {
     e.preventDefault();
@@ -14,7 +23,7 @@ const UpdateNote = ({ notes }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, content }),
+        body: JSON.stringify({ header: title, description: content }),
       });
 
       if (!response.ok) {
@@ -36,22 +45,37 @@ const UpdateNote = ({ notes }) => {
 
   return (
     <div>
-      <h1>Update a Note</h1>
-      <form onSubmit={updateNote}>
-        <div>
-          <label htmlFor="id">Note Id:</label>
-          <input type="text" value={id} onChange={(e) => setId(e.target.value)} id="id" required />
-        </div>
-        <div>
-          <label htmlFor="title">New Note Title:</label>
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} id="title" />
-        </div>
-        <div>
-          <label htmlFor="content">New Note Content:</label>
-          <textarea value={content} onChange={(e) => setContent(e.target.value)} id="content" placeholder="Note Content"></textarea>
-        </div>
-        <button type="submit">Update the Note</button>
-      </form>
+      <div className="container">
+        <form onSubmit={updateNote}>
+          <table>
+            <tr>
+              <td>
+                <select value={id} onChange={handleSelectChange}>
+                  <option value="">Select the Note</option>
+                  {notes.map(note => (
+                    <option key={note._id} value={note._id}>{note.header}</option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="New Title (Optional)" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Edited Note (Optional)"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="submit">Edit the Note</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Ultra&display=swap');
+.container { 
+    height:67vh;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+table {
+    width: 45%;
+    height:60vh;
+    margin:0 auto;
+    align-items: center;
+    padding:10px;
+    background-color: white;
+    border-radius: 10px;
+    
+}
+
+td {
+    padding: 10px;
+}
+
+input, textarea ,select{
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid black;
+    border-radius: 5px ;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+input{
+    font-family: 'Roboto Condensed','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+}
+textarea{
+    font-family: 'kanit','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:18px;
+    height:30vh;
+}
+input:focus, textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+    width: 30%;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    font-family: 'kanit','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: green;
+    transform: scale(1.05);
+}

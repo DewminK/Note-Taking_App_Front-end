@@ -1,14 +1,15 @@
 import React from 'react';
+import './Menu.css';
 import { Link } from 'react-router-dom';
 
 const Menu = () => (
   <div>
-    <h1>Menu</h1>
-    <nav>
+    <nav className="body">
+
       <ul>
-        <li><Link to="/create">Create Note</Link></li>
-        <li><Link to="/update">Update Note</Link></li>
-        <li><Link to="/delete">Delete Note</Link></li>
+        <li><Link to="/create">Add a Note</Link></li>
+        <li><Link to="/update">Edit a Note</Link></li>
+        <li><Link to="/delete">Delete a Note</Link></li>
         <li><Link to="/view">View Notes</Link></li>
       </ul>
     </nav>

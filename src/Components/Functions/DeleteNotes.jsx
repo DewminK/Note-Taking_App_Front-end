@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import './Display.css';
 
 const DeleteNote = ({ notes }) => {
   const [id, setId] = useState('');
+
+  const handleSelectChange = (e) => {
+    setId(e.target.value);
+  };
 
   const deleteNote = async (e) => {
     e.preventDefault();
@@ -27,14 +32,27 @@ const DeleteNote = ({ notes }) => {
 
   return (
     <div>
-      <h1>Delete a Note</h1>
+      <div className="container">
       <form onSubmit={deleteNote}>
-        <div>
-          <label htmlFor="id">Note Id:</label>
-          <input type="text" value={id} onChange={(e) => setId(e.target.value)} id="id" required />
-        </div>
-        <button type="submit">Delete the Note</button>
+        <table>
+          <tr>
+            <td>
+              <select value={id} onChange={handleSelectChange}>
+                <option value="">Select the Note</option>
+                {notes.map(note => (
+                  <option key={note._id} value={note._id}>{note.header}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="submit">Delete the Note</button>
+            </td>
+          </tr>
+        </table>
       </form>
+      </div>
     </div>
   );
 };
